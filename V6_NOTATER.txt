@@ -1,0 +1,11 @@
+ADR Gods v8 v7
+
+Fikset i v6:
+- øverste felt/boks ryddet bort
+- mørk/lys-knapp gjort om til faktisk tema-bytter
+- flytende Scan-knapp beholdt og forbedret mot UN-innslag
+- renere topp og faner
+
+Viktig:
+- scan-knappen er fortsatt første steg mot ekte kameraskanner
+- neste steg blir faktisk kamera + tekstgjenkjenning av UN-nummer

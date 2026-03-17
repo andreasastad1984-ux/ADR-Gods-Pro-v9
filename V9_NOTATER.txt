@@ -1,0 +1,13 @@
+ADR Gods Pro v9
+
+Nytt i v9:
+- toppruta fjernet
+- kortere navn på startskjerm: ADR Gods
+- nytt ikonoppsett
+- ekte native ScanActivity lagt inn
+- kamera + ML Kit tekstgjenkjenning for UN-nummer lagt inn
+
+Ærlig status:
+- dette er første native skannerversjon og er ikke testet av meg på en ekte telefon her
+- OCR kan være følsom for lys, vinkel og merketøy
+- hvis ikonet ikke oppdateres må gammel app avinstalleres før ny installasjon

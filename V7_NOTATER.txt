@@ -1,0 +1,11 @@
+ADR Gods v8
+
+Fikset i v7:
+- øverste infofelt ryddet bort
+- mørk/lys-knapp koblet til faktisk temabytte og lagring
+- kameraknapp åpner faktisk bilde/kamera-valg via telefonen
+- etter bildevalg kan UN-nummer fylles inn direkte i oppslag
+
+Ærlig status:
+- ekte OCR/tekstgjenkjenning av UN-nummer er ikke inne ennå
+- kamera åpner nå på ordentlig, men selve lesingen av UN-nummer fra bilde er neste steg

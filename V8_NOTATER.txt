@@ -1,0 +1,12 @@
+ADR Gods Pro v8
+
+Mål i v8:
+- topprute med appnavn fjernet
+- kortere appnavn på startskjerm: ADR Gods
+- nytt ikonoppsett med ekte ikonfiler
+- kameraknapp beholdt som faktisk kamera/bildevelger i appflyt
+
+Ærlig status:
+- ekte OCR er fortsatt ikke inne
+- kamera åpner/bildevelger forsøkes nå via appen, men endelig native kameraflyt kan fortsatt kreve videre Android-tilpasning
+- ikon bør testes ved å avinstallere gammel app før installasjon

@@ -1,0 +1,13 @@
+ADR Gods v8 v7 v4 v4 – proffversjon
+
+Endringer i v3:
+- ryddet toppseksjon
+- tydeligere hovedfaner
+- proffere sjåfør-layout
+- samme database- og kalkulatorgrunnlag som forrige fullversjon
+
+Neste naturlige steg:
+- bedre scanner
+- flere databasefelt
+- favoritter / historikk
+- ekte Android-ikonfinpuss

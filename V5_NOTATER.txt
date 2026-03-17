@@ -1,0 +1,12 @@
+ADR Gods v8 v7 v6
+
+Nytt i v5:
+- ryddet topp helt ned
+- kun appnavn øverst
+- enkel mørkmodus-knapp
+- flytende Scan-knapp nede til høyre
+- bedre utgangspunkt for riktig startskjermikon
+
+Viktig:
+- Scan-knappen er et bedre scan-/inntastingssteg, ikke full OCR-kamerascanner ennå
+- ikonoppsettet er fortsatt avhengig av korrekt installasjon/reinstallasjon på telefonen

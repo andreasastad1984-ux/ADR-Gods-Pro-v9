@@ -1,0 +1,13 @@
+ADR Gods v8 v7 v6 v5
+
+Endringer:
+- fjernet rotet i toppen
+- gjort toppseksjonen mye renere
+- lagt inn Scan UN-knapp
+- scannerknappen åpner enkelt scan-/inntastingsvalg
+- beholdt kalkulator, database og favoritter
+
+Neste steg:
+- ekte kameraskanner
+- automatisk tunnelkodevisning i alle treff
+- full 1000-poeng beregning med flere linjer
