@@ -22,16 +22,23 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.regex.Pattern
 
 class ScanActivity : AppCompatActivity() {
+
     private lateinit var previewView: PreviewView
     private lateinit var statusText: TextView
+
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
     private val cameraExecutor = Executors.newSingleThreadExecutor()
     private val busy = AtomicBoolean(false)
     private val pattern = Pattern.compile("\\b(?:UN\\s*)?(\\d{4})\\b", Pattern.CASE_INSENSITIVE)
 
-    private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-        if (granted) startCamera() else finish()
-    }
+    private val permissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) {
+                startCamera()
+            } else {
+                finish()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +47,9 @@ class ScanActivity : AppCompatActivity() {
         previewView = findViewById(R.id.previewView)
         statusText = findViewById(R.id.statusText)
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            == PackageManager.PERMISSION_GRANTED
+        ) {
             startCamera()
         } else {
             permissionLauncher.launch(Manifest.permission.CAMERA)
@@ -53,13 +62,16 @@ class ScanActivity : AppCompatActivity() {
     }
 
     private fun startCamera() {
-        val providerFuture = ProcessCameraProvider.getInstance(this)
-        providerFuture.addListener({
-            val provider = providerFuture.get()
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
-            val preview = Preview.Builder().build().also {
-                it.surfaceProvider = previewView.surfaceProvider
-            }
+        cameraProviderFuture.addListener({
+            val cameraProvider = cameraProviderFuture.get()
+
+            val preview = Preview.Builder()
+                .build()
+                .also {
+                    it.setSurfaceProvider(previewView.surfaceProvider)
+                }
 
             val analysis = ImageAnalysis.Builder()
                 .setTargetResolution(Size(1280, 720))
@@ -68,16 +80,22 @@ class ScanActivity : AppCompatActivity() {
                 .also { useCase ->
                     useCase.setAnalyzer(cameraExecutor) { imageProxy ->
                         val mediaImage = imageProxy.image
+
                         if (mediaImage == null || !busy.compareAndSet(false, true)) {
                             imageProxy.close()
                             return@setAnalyzer
                         }
 
-                        val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                        val image = InputImage.fromMediaImage(
+                            mediaImage,
+                            imageProxy.imageInfo.rotationDegrees
+                        )
+
                         recognizer.process(image)
                             .addOnSuccessListener { result ->
                                 val text = result.text ?: ""
                                 val matcher = pattern.matcher(text)
+
                                 if (matcher.find()) {
                                     val digits = matcher.group(1) ?: ""
                                     if (digits.length == 4) {
@@ -96,8 +114,16 @@ class ScanActivity : AppCompatActivity() {
                     }
                 }
 
-            provider.unbindAll()
-            provider.bindToLifecycle(this, CameraSelector.DEFAULT_BACK_CAMERA, preview, analysis)
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+            cameraProvider.unbindAll()
+            cameraProvider.bindToLifecycle(
+                this,
+                cameraSelector,
+                preview,
+                analysis
+            )
+
         }, ContextCompat.getMainExecutor(this))
     }
 
